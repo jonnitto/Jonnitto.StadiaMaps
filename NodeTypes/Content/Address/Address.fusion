@@ -1,0 +1,4 @@
+prototype(Jonnitto.StadiaMaps:Content.Address) < prototype(Carbon.GeoMap:Mixin.AddressElement) {
+    addressType = 'Jonnitto.StadiaMaps:Presentation.Address'
+    mapType = 'Jonnitto.StadiaMaps:Presentation.Map'
+}

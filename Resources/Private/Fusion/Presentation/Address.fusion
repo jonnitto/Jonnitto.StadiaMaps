@@ -1,0 +1,3 @@
+prototype(Jonnitto.StadiaMaps:Presentation.Address) < prototype(Carbon.GeoMap:Presentation.Address) {
+    class = 'jonnitto-stadiamaps-coordinate'
+}

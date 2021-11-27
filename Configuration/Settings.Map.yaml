@@ -1,0 +1,11 @@
+Jonnitto:
+  StadiaMaps:
+    aspectRatio: '16 / 9' # Please use the official CSS syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
+    mapStyle: outdoors # alidade_smooth, alidade_smooth_dark, outdoors or osm_bright
+    settings:
+      setRTLTextPlugin: false
+      pinColor: '#009fe3'
+      mapOptions:
+        scrollZoom: false
+        maxZoom: 20
+        # minZoom: 2

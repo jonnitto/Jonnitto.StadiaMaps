@@ -1,0 +1,11 @@
+'Jonnitto.StadiaMaps:Mixin.MaxZoom':
+  abstract: true
+  superTypes:
+    'Carbon.GeoMap:Mixin.MaxZoom': true
+  properties:
+    maxZoom:
+      defaultValue: 17
+      ui:
+        inspector:
+          editorOptions:
+            max: 17

@@ -1,0 +1,34 @@
+{
+    "name": "jonnitto/stadiamaps",
+    "type": "neos-plugin",
+    "license": "GPL-3.0-or-later",
+    "description": "Stadia Maps integration for Neos CMS. Live preview. Multiple addresses.",
+    "keywords": [
+        "flow",
+        "neos",
+        "Stadia Maps",
+        "Map"
+    ],
+    "authors": [
+        {
+            "name": "Jon Uhlmann",
+            "email": "hello@uhlmann.pro",
+            "homepage": "https://uhlmann.pro",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "carbon/geomap": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jonnitto\\StadiaMaps\\": "Classes"
+        }
+    },
+    "extra": {
+        "installer-name": "Jonnitto.StadiaMaps",
+        "neos": {
+            "package-key": "Jonnitto.StadiaMaps"
+        }
+    }
+}

@@ -1,0 +1,17 @@
+'Jonnitto.StadiaMaps:Mixin.MapStyle':
+  abstract: true
+  superTypes:
+    'Carbon.GeoMap:Mixin.MapStyle': true
+  properties:
+    mapStyle:
+      ui:
+        inspector:
+          editorOptions:
+            dataSourceAdditionalData:
+              packageKey: Jonnitto.StadiaMaps
+              styles:
+                - outdoors
+                - alidade_smooth
+                - alidade_smooth_dark
+                - osm_bright
+              previewPattern: Assets/mapStyle-%s.png

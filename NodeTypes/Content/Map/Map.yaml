@@ -1,0 +1,8 @@
+'Jonnitto.StadiaMaps:Content.Map':
+  superTypes:
+    'Carbon.GeoMap:Mixin.MapElement': true
+    #'Jonnitto.StadiaMaps:Mixin.MaxZoom': true
+    'Jonnitto.StadiaMaps:Mixin.MapStyle': true
+  constraints:
+    nodeTypes:
+      'Jonnitto.StadiaMaps:Content.Address': true
