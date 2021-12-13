@@ -6,7 +6,7 @@ import {
     updateLatLngEditors,
     initFrontend,
     initBackend,
-} from "DistributionPackages/Carbon.GeoMap/Resources/Private/Fusion/GeoMap.js";
+} from "Packages/Carbon/Carbon.GeoMap/Resources/Private/Fusion/GeoMap.js";
 
 import { Map, NavigationControl, Marker, Popup, LngLatBounds, setRTLTextPlugin } from "maplibre-gl";
 
