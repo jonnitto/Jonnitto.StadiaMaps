@@ -2,7 +2,7 @@ prototype(Jonnitto.StadiaMaps:Presentation.Map) < prototype(Carbon.GeoMap:Presen
     mapStyle = ${this.data.mapStyle || Configuration.Setting('Jonnitto.StadiaMaps.mapStyle')}
 
     globalSettings = ${Configuration.Setting('Jonnitto.StadiaMaps.settings')}
-    globalSettings.@process.style = ${Carbon.Array.setKeyValue(value, 'style', this.mapStyle)}
+    globalSettings.@process.style = ${Array.set(value, 'style', this.mapStyle)}
 
     class = 'jonnitto-stadiamaps'
 
