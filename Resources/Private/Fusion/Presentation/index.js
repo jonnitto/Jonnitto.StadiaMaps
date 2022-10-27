@@ -10,9 +10,62 @@ import {
 
 import { Map, NavigationControl, Marker, Popup, LngLatBounds, setRTLTextPlugin } from "maplibre-gl";
 
-const style = `https://tiles.stadiamaps.com/styles/${globalSettings.style || "outdoors"}.json`;
+// Style of map
+const HTML = document.documentElement;
+const styleSetting = globalSettings.style;
+const darkModePreference = window.matchMedia("(prefers-color-scheme: dark)");
+const hasDarkAndLightMode = !!(typeof styleSetting === "object" && styleSetting.light && styleSetting.dark);
+const changeStyleBasedOnClass = styleSetting.basedOn === "class";
 
-const initFunction = ({ element, live }) => {
+// Variable for the map
+let map = null;
+// Variable for the style
+let style = hasDarkAndLightMode ? getDynamicStyleUrl() : getStyleUrl(styleSetting);
+
+function getStyleUrl(key) {
+    return `https://tiles.stadiamaps.com/styles/${key || "outdoors"}.json`;
+}
+
+function getDynamicStyleUrl() {
+    let key = styleSetting.light;
+    if (
+        (!changeStyleBasedOnClass && darkModePreference.matches) ||
+        (changeStyleBasedOnClass && HTML.classList.contains("dark"))
+    ) {
+        key = styleSetting.dark;
+    }
+    return getStyleUrl(key);
+}
+
+function updateStyle() {
+    if (!map || typeof map.setStyle != "function") {
+        return;
+    }
+    let newStyle = getDynamicStyleUrl();
+    if (newStyle !== style) {
+        style = newStyle;
+        map.setStyle(style);
+    }
+}
+
+if (hasDarkAndLightMode) {
+    if (changeStyleBasedOnClass) {
+        const observer = new MutationObserver((mutationList) => {
+            mutationList.forEach(function (mutation) {
+                if (mutation.type === "attributes" && mutation.attributeName === "class") {
+                    updateStyle();
+                }
+            });
+        });
+        observer.observe(HTML, {
+            attributes: true,
+        });
+    } else {
+        darkModePreference.addEventListener("change", updateStyle);
+    }
+}
+
+function initFunction({ element, live }) {
     const settings = { ...globalSettings.mapOptions, ...JSON.parse(element.dataset?.map || null) };
     const canvas = getMapCanvas(element);
     const markerCollection = [];
@@ -41,7 +94,7 @@ const initFunction = ({ element, live }) => {
         center: [settings.center.lng, settings.center.lat],
     };
 
-    const map = new Map(mapSettings);
+    map = new Map(mapSettings);
 
     map.addControl(new NavigationControl());
 
@@ -109,6 +162,6 @@ const initFunction = ({ element, live }) => {
     setTimeout(() => {
         element.style.visibility = "visible";
     }, 50);
-};
+}
 
 export { initFunction, initFrontend, initBackend };
