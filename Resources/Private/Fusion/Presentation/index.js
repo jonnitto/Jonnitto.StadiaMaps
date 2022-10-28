@@ -14,8 +14,8 @@ import { Map, NavigationControl, Marker, Popup, LngLatBounds, setRTLTextPlugin }
 const HTML = document.documentElement;
 const styleSetting = globalSettings.style;
 const darkModePreference = window.matchMedia("(prefers-color-scheme: dark)");
-const hasDarkAndLightMode = !!(typeof styleSetting === "object" && styleSetting.light && styleSetting.dark);
-const changeStyleBasedOnClass = styleSetting.basedOn === "class";
+const hasDarkAndLightMode = !!(typeof styleSetting === "object" && styleSetting?.light && styleSetting?.dark);
+const changeStyleBasedOnClass = hasDarkAndLightMode ? styleSetting?.basedOn === "class" : false;
 
 // Variable for the map
 let map = null;

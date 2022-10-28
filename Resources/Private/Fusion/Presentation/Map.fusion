@@ -1,13 +1,7 @@
 prototype(Jonnitto.StadiaMaps:Presentation.Map) < prototype(Carbon.GeoMap:Presentation.Map) {
-    mapStyle = ${this.data.mapStyle || Configuration.Setting('Jonnitto.StadiaMaps.mapStyle')}
-
     globalSettings = ${Configuration.Setting('Jonnitto.StadiaMaps.settings')}
-    globalSettings.@process.style = ${Array.set(value, 'style', this.mapStyle)}
-
     class = 'jonnitto-stadiamaps'
-
     aspectRatio = ${Configuration.Setting('Jonnitto.StadiaMaps.aspectRatio')}
-
     js = ${StaticResource.uri('Jonnitto.StadiaMaps', 'Public/Scripts/' + (this.editable ? 'Backend' : 'Main') + '.js')}
     css = ${StaticResource.uri('Jonnitto.StadiaMaps', 'Public/Styles/Main.css')}
 }

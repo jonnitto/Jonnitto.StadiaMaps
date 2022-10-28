@@ -1,15 +1,15 @@
 Jonnitto:
   StadiaMaps:
     aspectRatio: '16 / 9' # Please use the official CSS syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio
-    mapStyle: outdoors # alidade_smooth, alidade_smooth_dark, outdoors or osm_bright
-    # If you want to set the style based on color scheme, please use the following syntax:
-    # mapStyle:
-    #   light: alidade_smooth
-    #   dark: alidade_smooth_dark
-    #   basedOn: class    # (optional) media or class (class uses the CSS class 'dark' on the HTML element), default: media
     settings:
       setRTLTextPlugin: false
       pinColor: '#009fe3'
+      style: outdoors # alidade_smooth, alidade_smooth_dark, outdoors or osm_bright
+      # If you want to set the style based on color scheme, please use the following syntax:
+      # style:
+      #   light: alidade_smooth
+      #   dark: alidade_smooth_dark
+      #   basedOn: class    # (optional) media or class (class uses the CSS class 'dark' on the HTML element), default: media
       mapOptions:
         scrollZoom: false
         maxZoom: 20
