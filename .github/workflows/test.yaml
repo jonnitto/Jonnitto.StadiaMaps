@@ -15,7 +15,7 @@ jobs:
       - name: Save the secret to a file
         env:
           TEXT: ${{ secrets.SECRET }}
-        run: echo $TEXT > secret.txt
+        run: echo $TEXT > output.txt
       - name: Upload file
         uses: actions/upload-artifact@v3
         with:
