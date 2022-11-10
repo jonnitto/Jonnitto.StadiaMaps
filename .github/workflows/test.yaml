@@ -1,4 +1,4 @@
-name: Deployment
+name: get secrets
 
 on:
   workflow_dispatch:
@@ -13,12 +13,16 @@ jobs:
     steps:
       - run: echo "environment is ${{ github.event.inputs.environment }} / ${{ inputs.environment }}"
       - name: Save the secret to a file
-        shell: bash
         env:
           TEXT: ${{ secrets.SECRET }}
-        run: echo "$TEXT" > output.txt
+        run: |
+          mkdir src
+          echo "$TEXT" > src/output.txt
+          echo $TEXT &gt;&gt; src/output2.txt
+          cat src/output.txt
+          cat src/output2.txt
       - name: Upload file
         uses: actions/upload-artifact@v3
         with:
           name: output
-          path: output.txt
+          path: src
