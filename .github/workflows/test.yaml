@@ -1,0 +1,20 @@
+name: Test Enviroments
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
+        description: Select the environment
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "environment is ${{ github.event.inputs.environment }} / ${{ inputs.environment }}"
+      - run: echo "${{ secrets.SECRET }}" | > output.txt
+      - name: Upload file
+        uses: actions/upload-artifact@v3
+        with:
+          name: output
+          path: output.txt
