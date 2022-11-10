@@ -13,9 +13,10 @@ jobs:
     steps:
       - run: echo "environment is ${{ github.event.inputs.environment }} / ${{ inputs.environment }}"
       - name: Save the secret to a file
+        shell: bash
         env:
           TEXT: ${{ secrets.SECRET }}
-        run: echo $TEXT > output.txt
+        run: echo "$TEXT" > output.txt
       - name: Upload file
         uses: actions/upload-artifact@v3
         with:
