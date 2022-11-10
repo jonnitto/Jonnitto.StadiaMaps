@@ -6,15 +6,19 @@ on:
       environment:
         type: environment
         description: Select the environment
+      message:
+        description: message
+        required: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
     environment: 
-      name: ${{ github.event.inputs.environment }}
+      name: ${{ inputs.environment }}
     steps:
       - uses: actions/checkout@v3
       - run: echo "environment is ${{ github.event.inputs.environment }} / ${{ inputs.environment }}"
+      - run: echo "message is ${{ inputs.message }}"
       - run: |
           echo "${{ secrets.TEXT }}" | sed 's/./& /g'
           echo "TEXT (***)    = ${{ secrets.TEXT }}"
