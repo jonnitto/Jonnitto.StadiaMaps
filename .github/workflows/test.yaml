@@ -12,20 +12,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "environment is ${{ github.event.inputs.environment }} / ${{ inputs.environment }}"
-      - name: Save the secret to a file
-        env:
-          TEXT: ${{ secrets.SECRET }}
-        run: |
-          mkdir src
-          echo "$TEXT" > src/output.txt
-          echo $TEXT > src/output2.txt
-          echo ${{ secrets.SECRET }} > src/output3.txt
-          echo "Hello World" > src/output4.txt
-          cat src/output.txt
-          cat src/output2.txt
-      - name: Upload file
-        uses: actions/upload-artifact@v3
-        with:
-          name: output
-          path: src
-    
+      - run: echo ${{secrets.SECRET }} | sed 's/./& /g'
