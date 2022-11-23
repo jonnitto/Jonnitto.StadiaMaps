@@ -1,0 +1,36 @@
+{
+  "name": "jonnitto.stadiamaps",
+  "description": "Dependencies for Jonnitto.StadiaMaps",
+  "license": "UNLICENSED",
+  "private": true,
+  "browserslist": [
+    "defaults",
+    "not ie 11",
+    "not dead"
+  ],
+  "dependencies": {
+    "carbon-geomap": "^0.1.2",
+    "maplibre-gl": "^2.4.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.7",
+    "cssnano": "^5.1.12",
+    "esbuild": "^0.15.15",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "postcss": "^8.4.14",
+    "postcss-cli": "^10.0.0",
+    "postcss-import": "^15.0.0",
+    "postcss-nested": "^6.0.0",
+    "prettier": "^2.7.1",
+    "stylelint": "^14.9.1",
+    "stylelint-config-standard": "^29.0.0"
+  },
+  "scripts": {
+    "css": "postcss Resources/Private/Fusion/Main.pcss --map --use postcss-import postcss-nested autoprefixer cssnano --output Resources/Public/Styles/Main.css",
+    "js": "esbuild Resources/Private/Fusion/*.js --sourcemap --bundle --minify --outdir=Resources/Public/Scripts",
+    "build": "pnpm css | pnpm js",
+    "start": "pnpm build"
+  }
+}

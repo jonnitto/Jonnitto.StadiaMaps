@@ -6,7 +6,7 @@ import {
     updateLatLngEditors,
     initFrontend,
     initBackend,
-} from "Packages/Carbon/Carbon.GeoMap/Resources/Private/Fusion/GeoMap.js";
+} from "carbon-geomap";
 
 import { Map, NavigationControl, Marker, Popup, LngLatBounds, setRTLTextPlugin } from "maplibre-gl";
 
@@ -104,11 +104,14 @@ function initFunction({ element, live }) {
         const marker = new Marker({ color: globalSettings.pinColor, draggable: !live });
         marker.setLngLat([address.lng, address.lat]);
 
-        const popup = new Popup({ closeButton: false, maxWidth: null });
-        popup.setHTML(address.html);
+        console.log({ address });
+        if (address.popup) {
+            const popup = new Popup({ closeButton: false, maxWidth: null });
+            popup.setHTML(address.html);
 
-        // Set the marker's popup.
-        marker.setPopup(popup);
+            // Set the marker's popup.
+            marker.setPopup(popup);
+        }
 
         // Finally, we add the marker to the map.
         marker.addTo(map);
