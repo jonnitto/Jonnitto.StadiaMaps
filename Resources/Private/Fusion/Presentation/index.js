@@ -104,7 +104,6 @@ function initFunction({ element, live }) {
         const marker = new Marker({ color: globalSettings.pinColor, draggable: !live });
         marker.setLngLat([address.lng, address.lat]);
 
-        console.log({ address });
         if (address.popup) {
             const popup = new Popup({ closeButton: false, maxWidth: null });
             popup.setHTML(address.html);
