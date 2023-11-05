@@ -1,12 +1,4 @@
-import {
-    globalSettings,
-    getMapCanvas,
-    getAddresses,
-    getLatLngEditors,
-    updateLatLngEditors,
-    initFrontend,
-    initBackend,
-} from "carbon-geomap";
+import { globalSettings, getMapCanvas, getAddresses, initFrontend } from "carbon-geomap";
 
 import { Map, NavigationControl, Marker, Popup, LngLatBounds, setRTLTextPlugin } from "maplibre-gl";
 
@@ -65,14 +57,14 @@ if (hasDarkAndLightMode) {
     }
 }
 
-function initFunction({ element, live }) {
+function initFunction(element) {
+    const inBackend = window.name == "neos-content-main";
     const settings = { ...globalSettings.mapOptions, ...JSON.parse(element.dataset?.map || null) };
     const canvas = getMapCanvas(element);
     const markerCollection = [];
     const addresses = getAddresses(canvas);
     const numberOfAddresses = addresses.length;
-    const inEditMode = !live && numberOfAddresses === 1;
-    const zoom = settings.defaultZoom || live ? 14 : 16;
+    const zoom = settings.defaultZoom || 14;
 
     if (!settings.center) {
         settings.center = { lng: 0, lat: 0 };
@@ -82,7 +74,7 @@ function initFunction({ element, live }) {
         setRTLTextPlugin(
             "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js",
             null,
-            true // Lazy load the plugin
+            true, // Lazy load the plugin
         );
     }
 
@@ -94,6 +86,8 @@ function initFunction({ element, live }) {
         center: [settings.center.lng, settings.center.lat],
     };
 
+    console.log("mapSettings", mapSettings, numberOfAddresses)
+
     map = new Map(mapSettings);
 
     map.addControl(new NavigationControl());
@@ -101,7 +95,7 @@ function initFunction({ element, live }) {
     addresses.forEach((address) => {
         // Construct a marker and set it's coordinates
 
-        const marker = new Marker({ color: globalSettings.pinColor, draggable: !live });
+        const marker = new Marker({ color: globalSettings.pinColor });
         marker.setLngLat([address.lng, address.lat]);
 
         if (address.popup) {
@@ -117,31 +111,22 @@ function initFunction({ element, live }) {
 
         markerCollection.push(marker);
 
-        if (inEditMode) {
-            // Wait for the Neos UI
-            setTimeout(() => {
-                const EDITORS = getLatLngEditors(element);
-                if (EDITORS) {
-                    marker.on("drag", () => {
-                        const lngLat = marker.getLngLat();
-                        updateLatLngEditors(EDITORS, lngLat);
-                    });
-                }
-            }, 10);
+        if (inBackend) {
+            marker.getElement().addEventListener("click", () => {
+                // this select the node in the backend
+                ["mousedown", "mouseup"].forEach((event) =>
+                    address.element.dispatchEvent(new Event(event, { bubbles: true })),
+            });
         }
     });
 
     if (numberOfAddresses > 1) {
-        const firstBound = markerCollection[0].getLngLat();
-        const secondBound = markerCollection[1].getLngLat();
-        const bounds = new LngLatBounds(firstBound, secondBound);
-
-        const numberOfTheRest = numberOfAddresses - 2;
-
-        for (let i = 0; i < numberOfTheRest; i++) {
-            bounds.extend(markerCollection[i + 2].getLngLat());
-        }
-
+        const coord = markerCollection.map((marker) => marker.getLngLat());
+        const coordinates = coord;
+        const bounds = coordinates.reduce(
+            (bounds, coord) => bounds.extend(coord),
+            new LngLatBounds(coordinates[0], coordinates[0]),
+        );
         map.fitBounds(bounds, { padding: 80, linear: true, maxZoom: zoom });
     }
 
@@ -158,7 +143,7 @@ function initFunction({ element, live }) {
                 element,
                 markers: markerCollection,
             },
-        })
+        }),
     );
 
     setTimeout(() => {
@@ -166,4 +151,4 @@ function initFunction({ element, live }) {
     }, 50);
 }
 
-export { initFunction, initFrontend, initBackend };
+export { initFunction, initFrontend };

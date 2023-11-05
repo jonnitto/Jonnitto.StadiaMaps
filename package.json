@@ -9,23 +9,23 @@
     "not dead"
   ],
   "dependencies": {
-    "carbon-geomap": "^0.1.2",
-    "maplibre-gl": "^2.4.0"
+    "carbon-geomap": "^0.2.0",
+    "maplibre-gl": "^3.5.2"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.7",
-    "cssnano": "^5.1.12",
-    "esbuild": "^0.15.15",
-    "eslint": "^8.28.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "postcss": "^8.4.14",
-    "postcss-cli": "^10.0.0",
-    "postcss-import": "^15.0.0",
-    "postcss-nested": "^6.0.0",
-    "prettier": "^2.7.1",
-    "stylelint": "^14.9.1",
-    "stylelint-config-standard": "^29.0.0"
+    "autoprefixer": "^10.4.16",
+    "cssnano": "^6.0.1",
+    "esbuild": "^0.19.5",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "postcss-import": "^15.1.0",
+    "postcss-nested": "^6.0.1",
+    "prettier": "^3.0.3",
+    "stylelint": "^15.11.0",
+    "stylelint-config-standard": "^34.0.0"
   },
   "scripts": {
     "css": "postcss Resources/Private/Fusion/Main.pcss --map --use postcss-import postcss-nested autoprefixer cssnano --output Resources/Public/Styles/Main.css",
